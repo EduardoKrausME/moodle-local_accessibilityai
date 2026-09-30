@@ -1,0 +1,57 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Page content provider.
+ *
+ * @package   local_accessibilityai
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+namespace local_accessibilityai\content\provider;
+
+use course_modinfo;
+use local_accessibilityai\content\content_item;
+use local_accessibilityai\content\provider_interface;
+use moodle_url;
+use stdClass;
+
+/**
+ * Collect Page module content.
+ */
+final class page_provider implements provider_interface {
+    /** @inheritDoc */
+    public function collect(stdClass $course, course_modinfo $modinfo): array {
+        global $DB;
+        $items = [];
+        foreach ($modinfo->get_instances_of('page') as $cm) {
+            $record = $DB->get_record('page', ['id' => $cm->instance], 'id,name,content');
+            if (!$record || trim(strip_tags((string)$record->content)) === '') {
+                continue;
+            }
+            $items[] = new content_item(
+                'page:' . $record->id,
+                'page',
+                format_string($record->name),
+                get_string('source_page', 'local_accessibilityai') . ': ' . format_string($record->name),
+                (string)$record->content,
+                new moodle_url('/course/modedit.php', ['update' => $cm->id])
+            );
+        }
+        return $items;
+    }
+}

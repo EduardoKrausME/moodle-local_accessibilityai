@@ -1,0 +1,58 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Label/Text and media area provider.
+ *
+ * @package   local_accessibilityai
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+namespace local_accessibilityai\content\provider;
+
+use course_modinfo;
+use local_accessibilityai\content\content_item;
+use local_accessibilityai\content\provider_interface;
+use moodle_url;
+use stdClass;
+
+/**
+ * Collect Label/Text and media area content.
+ */
+final class label_provider implements provider_interface {
+    /** @inheritDoc */
+    public function collect(stdClass $course, course_modinfo $modinfo): array {
+        global $DB;
+        $items = [];
+        foreach ($modinfo->get_instances_of('label') as $cm) {
+            $record = $DB->get_record('label', ['id' => $cm->instance], 'id,intro');
+            if (!$record || trim(strip_tags((string)$record->intro)) === '') {
+                continue;
+            }
+            $title = format_string($cm->name);
+            $items[] = new content_item(
+                'label:' . $record->id,
+                'label',
+                $title,
+                get_string('source_label', 'local_accessibilityai') . ': ' . $title,
+                (string)$record->intro,
+                new moodle_url('/course/modedit.php', ['update' => $cm->id])
+            );
+        }
+        return $items;
+    }
+}

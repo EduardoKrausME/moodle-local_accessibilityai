@@ -1,0 +1,126 @@
+{{!
+    Accessibility audit report.
+    @template local_accessibilityai/report
+}}
+<div class="local-accessibilityai-report">
+    <h2>{{#str}}reportsummary, local_accessibilityai{{/str}}</h2>
+    <div class="row mb-4">
+        <div class="col-sm-6 col-lg-3 mb-2">
+            <div class="card h-100"><div class="card-body">
+                <div class="text-muted">{{#str}}itemschecked, local_accessibilityai{{/str}}</div>
+                <div class="h3 mb-0">{{itemcount}}</div>
+            </div></div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mb-2">
+            <div class="card h-100"><div class="card-body">
+                <div class="text-muted">{{#str}}errors, local_accessibilityai{{/str}}</div>
+                <div class="h3 mb-0">{{errorcount}}</div>
+            </div></div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mb-2">
+            <div class="card h-100"><div class="card-body">
+                <div class="text-muted">{{#str}}warnings, local_accessibilityai{{/str}}</div>
+                <div class="h3 mb-0">{{warningcount}}</div>
+            </div></div>
+        </div>
+        <div class="col-sm-6 col-lg-3 mb-2">
+            <div class="card h-100"><div class="card-body">
+                <div class="text-muted">{{#str}}aisuggestions, local_accessibilityai{{/str}}</div>
+                <div class="h3 mb-0">{{aicount}}</div>
+            </div></div>
+        </div>
+    </div>
+
+    {{#hasaierrors}}
+        <div class="alert alert-warning" role="alert">
+            <strong>{{#str}}aiwarningtitle, local_accessibilityai{{/str}}</strong>
+            <ul class="mb-0 mt-2">
+                {{#aierrors}}<li>{{message}}</li>{{/aierrors}}
+            </ul>
+        </div>
+    {{/hasaierrors}}
+
+    {{#noitems}}
+        <div class="alert alert-info">{{#str}}noitems, local_accessibilityai{{/str}}</div>
+    {{/noitems}}
+
+    {{#items}}
+        <section class="card mb-4">
+            <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <div>
+                    <h3 class="h5 mb-1">{{title}}</h3>
+                    <div class="text-muted small">{{location}}</div>
+                </div>
+                <a class="btn btn-outline-secondary btn-sm" href="{{editurl}}">{{#str}}editcontent, local_accessibilityai{{/str}}</a>
+            </div>
+            <div class="card-body">
+                {{#nofindings}}
+                    <div class="alert alert-secondary mb-0">{{#str}}nofindings, local_accessibilityai{{/str}}</div>
+                {{/nofindings}}
+
+                {{#haserrors}}
+                    <h4 class="h6">{{#str}}errors, local_accessibilityai{{/str}}</h4>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-sm align-middle">
+                            <thead><tr>
+                                <th scope="col">{{#str}}rule, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}element, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}location, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}reason, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}suggestion, local_accessibilityai{{/str}}</th>
+                                <th scope="col"><span class="visually-hidden">{{#str}}editcontent, local_accessibilityai{{/str}}</span></th>
+                            </tr></thead>
+                            <tbody>
+                                {{#errors}}<tr>
+                                    <td><code>{{ruleid}}</code></td><td>{{element}}</td><td>{{location}}</td><td>{{reason}}</td><td>{{suggestion}}</td><td><a href="{{editurl}}">{{#str}}editcontent, local_accessibilityai{{/str}}</a></td>
+                                </tr>{{/errors}}
+                            </tbody>
+                        </table>
+                    </div>
+                {{/haserrors}}
+
+                {{#haswarnings}}
+                    <h4 class="h6">{{#str}}warnings, local_accessibilityai{{/str}}</h4>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-sm align-middle">
+                            <thead><tr>
+                                <th scope="col">{{#str}}rule, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}element, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}location, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}reason, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}suggestion, local_accessibilityai{{/str}}</th>
+                                <th scope="col"><span class="visually-hidden">{{#str}}editcontent, local_accessibilityai{{/str}}</span></th>
+                            </tr></thead>
+                            <tbody>
+                                {{#warnings}}<tr>
+                                    <td><code>{{ruleid}}</code></td><td>{{element}}</td><td>{{location}}</td><td>{{reason}}</td><td>{{suggestion}}</td><td><a href="{{editurl}}">{{#str}}editcontent, local_accessibilityai{{/str}}</a></td>
+                                </tr>{{/warnings}}
+                            </tbody>
+                        </table>
+                    </div>
+                {{/haswarnings}}
+
+                {{#hasaisuggestions}}
+                    <h4 class="h6">{{#str}}aisuggestions, local_accessibilityai{{/str}}</h4>
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            <thead><tr>
+                                <th scope="col">{{#str}}category, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}element, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}location, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}reason, local_accessibilityai{{/str}}</th>
+                                <th scope="col">{{#str}}suggestion, local_accessibilityai{{/str}}</th>
+                                <th scope="col"><span class="visually-hidden">{{#str}}editcontent, local_accessibilityai{{/str}}</span></th>
+                            </tr></thead>
+                            <tbody>
+                                {{#aisuggestions}}<tr>
+                                    <td><code>{{category}}</code></td><td>{{element}}</td><td>{{location}}</td><td>{{reason}}</td><td>{{suggestion}}</td><td><a href="{{editurl}}">{{#str}}editcontent, local_accessibilityai{{/str}}</a></td>
+                                </tr>{{/aisuggestions}}
+                            </tbody>
+                        </table>
+                    </div>
+                {{/hasaisuggestions}}
+            </div>
+        </section>
+    {{/items}}
+</div>
