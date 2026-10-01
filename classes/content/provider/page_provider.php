@@ -34,7 +34,7 @@ use stdClass;
  * Collect Page module content.
  */
 final class page_provider implements provider_interface {
-    /** @inheritDoc */
+
     public function collect(stdClass $course, course_modinfo $modinfo): array {
         global $DB;
         $items = [];

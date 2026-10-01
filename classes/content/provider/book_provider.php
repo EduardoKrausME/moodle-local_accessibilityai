@@ -34,7 +34,7 @@ use stdClass;
  * Collect Book introductions and chapters.
  */
 final class book_provider implements provider_interface {
-    /** @inheritDoc */
+
     public function collect(stdClass $course, course_modinfo $modinfo): array {
         global $DB;
         $items = [];

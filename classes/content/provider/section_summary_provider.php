@@ -34,7 +34,7 @@ use stdClass;
  * Collect course section summaries.
  */
 final class section_summary_provider implements provider_interface {
-    /** @inheritDoc */
+
     public function collect(stdClass $course, course_modinfo $modinfo): array {
         $items = [];
         foreach ($modinfo->get_section_info_all() as $section) {

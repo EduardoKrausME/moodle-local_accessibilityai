@@ -33,10 +33,14 @@ use Throwable;
  * Run semantic review in bounded batches through the mandatory AI bridge.
  */
 final class reviewer {
-    /** Maximum items sent in one AI request. */
+    /**
+     * Maximum items sent in one AI request.
+     */
     private const MAX_BATCH_ITEMS = 6;
 
-    /** Maximum approximate JSON characters in one batch. */
+    /**
+     * Maximum approximate JSON characters in one batch.
+     */
     private const MAX_BATCH_CHARS = 30000;
 
     /**

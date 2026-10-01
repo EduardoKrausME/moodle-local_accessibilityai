@@ -34,7 +34,7 @@ use stdClass;
  * Collect Forum descriptions only, never forum posts.
  */
 final class forum_provider implements provider_interface {
-    /** @inheritDoc */
+
     public function collect(stdClass $course, course_modinfo $modinfo): array {
         global $DB;
         $items = [];

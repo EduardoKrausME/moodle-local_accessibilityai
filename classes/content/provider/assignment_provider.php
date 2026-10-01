@@ -34,7 +34,7 @@ use stdClass;
  * Collect Assignment descriptions only, never submissions.
  */
 final class assignment_provider implements provider_interface {
-    /** @inheritDoc */
+
     public function collect(stdClass $course, course_modinfo $modinfo): array {
         global $DB;
         $items = [];

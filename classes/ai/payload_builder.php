@@ -32,7 +32,9 @@ use local_accessibilityai\content\content_item;
  * Convert HTML into semantic features needed by AI, without sending edit URLs or unrelated Moodle data.
  */
 final class payload_builder {
-    /** Maximum plain text characters per item. */
+    /**
+     * Maximum plain text characters per item.
+     */
     private const MAX_TEXT = 7000;
 
     /**
