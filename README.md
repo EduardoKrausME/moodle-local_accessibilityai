@@ -15,7 +15,7 @@ The collector audits teacher-authored course content from:
 - Assignment descriptions;
 - Forum descriptions.
 
-This version deliberately does **not** inspect assignment submissions, forum posts, quiz attempts, messages, private
+The plugin deliberately does **not** inspect assignment submissions, forum posts, quiz attempts, messages, private
 files or other learner-generated content.
 
 The extraction layer is isolated behind `local_accessibilityai\content\provider_interface`, so new Moodle content
