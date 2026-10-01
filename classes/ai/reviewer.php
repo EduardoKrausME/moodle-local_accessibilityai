@@ -26,6 +26,7 @@ namespace local_accessibilityai\ai;
 
 use local_accessibilityai\audit\finding;
 use local_accessibilityai\content\content_item;
+use local_ai_bridge\api;
 use Throwable;
 
 /**
@@ -72,7 +73,7 @@ final class reviewer {
             $allowedids = array_column($batch, 'itemid');
             try {
                 $messages = $this->messages($batch);
-                $response = \local_ai_bridge\api::generate('accessibilityai-review', $messages);
+                $response = api::generate('accessibilityai-review', $messages);
                 foreach ($parser->parse($response->text, $allowedids) as $suggestion) {
                     $suggestions[$suggestion['itemid']][] = $suggestion;
                 }

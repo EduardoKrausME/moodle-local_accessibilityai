@@ -26,6 +26,8 @@ namespace local_accessibilityai\audit;
 
 use DOMDocument;
 use DOMElement;
+use DOMNode;
+use DOMNodeList;
 use DOMXPath;
 
 /**
@@ -57,19 +59,19 @@ final class html_fragment {
      * Query DOM nodes.
      *
      * @param string $query XPath expression.
-     * @return \DOMNodeList
+     * @return DOMNodeList
      */
-    public function query(string $query): \DOMNodeList {
+    public function query(string $query): DOMNodeList {
         return $this->xpath->query($query);
     }
 
     /**
      * Return normalized text for a node.
      *
-     * @param \DOMNode $node Node.
+     * @param DOMNode $node Node.
      * @return string
      */
-    public static function text(\DOMNode $node): string {
+    public static function text(DOMNode $node): string {
         return preg_replace('/\s+/u', ' ', trim((string)$node->textContent)) ?? '';
     }
 

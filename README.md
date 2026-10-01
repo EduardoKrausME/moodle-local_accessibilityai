@@ -1,6 +1,8 @@
 # local_accessibilityai
 
-Accessibility assistance for Moodle 4.5+ that combines deterministic HTML/PHP checks with semantic AI review. The plugin is designed around a strict rule: anything that can be detected reliably from the stored HTML is analysed locally; AI is reserved for semantic judgements that need language/context reasoning.
+Accessibility assistance for Moodle 4.5+ that combines deterministic HTML/PHP checks with semantic AI review. The plugin
+is designed around a strict rule: anything that can be detected reliably from the stored HTML is analysed locally; AI is
+reserved for semantic judgements that need language/context reasoning.
 
 ## Dependency
 
@@ -18,7 +20,8 @@ Every AI request is made exclusively through:
 \local_ai_bridge\api::generate('accessibilityai-review', $messages);
 ```
 
-There are no provider endpoints, model settings, API keys or direct OpenAI/Gemini/Claude/Ollama integrations in this plugin.
+There are no provider endpoints, model settings, API keys or direct OpenAI/Gemini/Claude/Ollama integrations in this
+plugin.
 
 ## Supported content in 1.0
 
@@ -31,9 +34,11 @@ The collector audits teacher-authored course content from:
 - Assignment descriptions;
 - Forum descriptions.
 
-This version deliberately does **not** inspect assignment submissions, forum posts, quiz attempts, messages, private files or other learner-generated content.
+This version deliberately does **not** inspect assignment submissions, forum posts, quiz attempts, messages, private
+files or other learner-generated content.
 
-The extraction layer is isolated behind `local_accessibilityai\content\provider_interface`, so new Moodle content sources can be added without changing the deterministic rules or AI integration.
+The extraction layer is isolated behind `local_accessibilityai\content\provider_interface`, so new Moodle content
+sources can be added without changing the deterministic rules or AI integration.
 
 ## Deterministic checks
 
@@ -53,13 +58,18 @@ The local HTML engine currently detects:
 - audio without locally detectable transcript indicators;
 - common embedded video iframes without nearby transcript/caption indicators;
 - iframes without `title`;
-- simple contrast problems only when opaque foreground and background colors are explicitly present on the same element through inline CSS.
+- simple contrast problems only when opaque foreground and background colors are explicitly present on the same element
+  through inline CSS.
 
-Contrast is intentionally conservative. The plugin cannot infer final theme styles, inherited CSS, pseudo-elements, transparency, background images or the browser's final computed style from stored HTML alone. For real contrast validation, use a rendered-page accessibility tool in the browser.
+Contrast is intentionally conservative. The plugin cannot infer final theme styles, inherited CSS, pseudo-elements,
+transparency, background images or the browser's final computed style from stored HTML alone. For real contrast
+validation, use a rendered-page accessibility tool in the browser.
 
 ## AI semantic review
 
-The semantic payload is minimized before it reaches the bridge. It contains local item IDs, headings, link text/target context, image alt/title/filename/context, plain text and deterministic rule IDs. Edit URLs are never supplied by AI and are never accepted from AI responses.
+The semantic payload is minimized before it reaches the bridge. It contains local item IDs, headings, link text/target
+context, image alt/title/filename/context, plain text and deterministic rule IDs. Edit URLs are never supplied by AI and
+are never accepted from AI responses.
 
 The AI is asked to review:
 
@@ -70,17 +80,23 @@ The AI is asked to review:
 - possible alternative descriptions that must be verified by a human;
 - suggestions for textual simplification.
 
-Responses must be JSON and are strictly parsed, item IDs are whitelisted to the current request batch, markup is stripped and model-provided URLs are not used.
+Responses must be JSON and are strictly parsed, item IDs are whitelisted to the current request batch, markup is
+stripped and model-provided URLs are not used.
 
-The AI prompt explicitly treats Moodle content as untrusted data so instructions embedded in course content are not supposed to become tool instructions.
+The AI prompt explicitly treats Moodle content as untrusted data so instructions embedded in course content are not
+supposed to become tool instructions.
 
 ## Human review and WCAG limitations
 
-This plugin is assistance, not certification. Passing the report does not prove WCAG conformance and the UI never labels a course as “accessible” merely because no finding was returned.
+This plugin is assistance, not certification. Passing the report does not prove WCAG conformance and the UI never labels
+a course as “accessible” merely because no finding was returned.
 
-A professibility review can require inspection of final rendering, keyboard behaviour, focus management, ARIA relationships, screen-reader behaviour, media quality, colour use, authoring context, external players, linked documents, PDFs and interactions that are outside the stored HTML analysed here.
+A professibility review can require inspection of final rendering, keyboard behaviour, focus management, ARIA
+relationships, screen-reader behaviour, media quality, colour use, authoring context, external players, linked
+documents, PDFs and interactions that are outside the stored HTML analysed here.
 
-No content is modified automatically. Every finding includes the source location and a Moodle-controlled edit link so the teacher can decide what should change.
+No content is modified automatically. Every finding includes the source location and a Moodle-controlled edit link so
+the teacher can decide what should change.
 
 ## Capability
 
@@ -92,7 +108,9 @@ By default it is granted to editing teachers and managers.
 
 ## Privacy
 
-`local_accessibilityai` does not persist audit content or results in its own database. When AI review runs, minimized teacher-authored course content is sent to `local_ai_bridge`, which applies its configured tenant, purpose, route, provider, usage and privacy rules. The bridge may record its own usage metadata according to its implementation.
+`local_accessibilityai` does not persist audit content or results in its own database. When AI review runs, minimized
+teacher-authored course content is sent to `local_ai_bridge`, which applies its configured tenant, purpose, route,
+provider, usage and privacy rules. The bridge may record its own usage metadata according to its implementation.
 
 Student submissions are not analysed in this version.
 
@@ -109,7 +127,8 @@ The PHPUnit suite contains HTML fixtures for every deterministic rule category r
 
 ## Continuous integration
 
-`.github/workflows/ci.yml` installs the required AI bridge as an extra Moodle plugin, runs Moodle Plugin CI, PHPUnit and `EduardoKrausME/moodle-plugin-validate`.
+`.github/workflows/ci.yml` installs the required AI bridge as an extra Moodle plugin, runs Moodle Plugin CI, PHPUnit
+and `EduardoKrausME/moodle-plugin-validate`.
 
 ## License
 

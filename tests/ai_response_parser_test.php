@@ -67,14 +67,14 @@ final class ai_response_parser_test extends advanced_testcase {
      */
     public function test_response_is_sanitized(): void {
         $response = '```json\n' . json_encode([
-            'suggestions' => [[
-                'itemid' => 'page:10',
-                'category' => 'other',
-                'element' => '<b>link:1</b>',
-                'reason' => '<script>alert(1)</script><strong>Reason</strong>',
-                'suggestion' => '<img src=x onerror=alert(1)>Use clearer text.',
-            ]],
-        ]) . '\n```';
+                'suggestions' => [[
+                    'itemid' => 'page:10',
+                    'category' => 'other',
+                    'element' => '<b>link:1</b>',
+                    'reason' => '<script>alert(1)</script><strong>Reason</strong>',
+                    'suggestion' => '<img src=x onerror=alert(1)>Use clearer text.',
+                ]],
+            ]) . '\n```';
         $result = (new response_parser())->parse($response, ['page:10']);
         $this->assertSame('link:1', $result[0]['element']);
         $this->assertStringNotContainsString('<', $result[0]['reason']);

@@ -24,6 +24,13 @@
 
 namespace local_accessibilityai\content;
 
+use local_accessibilityai\content\provider\assignment_provider;
+use local_accessibilityai\content\provider\book_provider;
+use local_accessibilityai\content\provider\forum_provider;
+use local_accessibilityai\content\provider\label_provider;
+use local_accessibilityai\content\provider\page_provider;
+use local_accessibilityai\content\provider\section_summary_provider;
+
 /**
  * Registry for supported Moodle content sources.
  */
@@ -38,12 +45,12 @@ final class provider_registry {
      */
     public static function classes(): array {
         return [
-            \local_accessibilityai\content\provider\section_summary_provider::class,
-            \local_accessibilityai\content\provider\page_provider::class,
-            \local_accessibilityai\content\provider\book_provider::class,
-            \local_accessibilityai\content\provider\label_provider::class,
-            \local_accessibilityai\content\provider\assignment_provider::class,
-            \local_accessibilityai\content\provider\forum_provider::class,
+            section_summary_provider::class,
+            page_provider::class,
+            book_provider::class,
+            label_provider::class,
+            assignment_provider::class,
+            forum_provider::class,
         ];
     }
 }

@@ -22,6 +22,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_accessibilityai\audit\course_auditor;
+
 require_once(__DIR__ . '/../../config.php');
 
 $courseid = required_param('id', PARAM_INT);
@@ -44,7 +46,7 @@ $report = null;
 
 if ($run) {
     require_sesskey();
-    $auditor = new \local_accessibilityai\audit\course_auditor();
+    $auditor = new course_auditor();
     $report = $auditor->audit($course);
 }
 

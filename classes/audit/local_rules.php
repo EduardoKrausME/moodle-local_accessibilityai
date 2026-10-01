@@ -346,7 +346,7 @@ final class local_rules {
             }
             $src = mb_strtolower($node->getAttribute('src'));
             if ((str_contains($src, 'youtube.') || str_contains($src, 'youtu.be') || str_contains($src, 'vimeo.'))
-                    && !$hastranscriptword) {
+                && !$hastranscriptword) {
                 $findings[] = new finding(
                     'embedded_media_transcript_not_detected',
                     'warning',
@@ -568,7 +568,7 @@ final class local_rules {
      * @return float
      */
     private function relative_luminance(array $rgb): float {
-        $channels = array_map(static function(int $value): float {
+        $channels = array_map(static function (int $value): float {
             $channel = $value / 255;
             return $channel <= 0.04045 ? $channel / 12.92 : (($channel + 0.055) / 1.055) ** 2.4;
         }, $rgb);

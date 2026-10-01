@@ -48,7 +48,7 @@ final class collector {
             }
         }
 
-        usort($items, static function(content_item $a, content_item $b): int {
+        usort($items, static function (content_item $a, content_item $b): int {
             return [$a->source, $a->location, $a->id] <=> [$b->source, $b->location, $b->id];
         });
 
