@@ -1,27 +1,8 @@
 # local_accessibilityai
 
-Accessibility assistance for Moodle 4.5+ that combines deterministic HTML/PHP checks with semantic AI review. The plugin
+Accessibility assistance for Moodle that combines deterministic HTML/PHP checks with semantic AI review. The plugin
 is designed around a strict rule: anything that can be detected reliably from the stored HTML is analysed locally; AI is
 reserved for semantic judgements that need language/context reasoning.
-
-## Dependency
-
-The plugin requires `local_ai_bridge >= 2026093001`:
-
-```php
-$plugin->dependencies = [
-    'local_ai_bridge' => 2026093001,
-];
-```
-
-Every AI request is made exclusively through:
-
-```php
-\local_ai_bridge\api::generate('accessibilityai-review', $messages);
-```
-
-There are no provider endpoints, model settings, API keys or direct OpenAI/Gemini/Claude/Ollama integrations in this
-plugin.
 
 ## Supported content in 1.0
 
@@ -112,24 +93,4 @@ By default it is granted to editing teachers and managers.
 teacher-authored course content is sent to `local_ai_bridge`, which applies its configured tenant, purpose, route,
 provider, usage and privacy rules. The bridge may record its own usage metadata according to its implementation.
 
-Student submissions are not analysed in this version.
-
-## Tests
-
-The PHPUnit suite contains HTML fixtures for every deterministic rule category requested, plus tests for:
-
-- AI JSON parsing;
-- rejection of unknown item IDs;
-- sanitization of model output;
-- malformed AI responses;
-- capability defaults;
-- false-positive guards for explicit decorative images and presentational tables.
-
-## Continuous integration
-
-`.github/workflows/ci.yml` installs the required AI bridge as an extra Moodle plugin, runs Moodle Plugin CI, PHPUnit
-and `EduardoKrausME/moodle-plugin-validate`.
-
-## License
-
-GNU GPL v3 or later.
+Student submissions are not analysed in the plugin.
