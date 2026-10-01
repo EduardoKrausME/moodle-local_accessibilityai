@@ -4,7 +4,7 @@ Accessibility assistance for Moodle that combines deterministic HTML/PHP checks 
 is designed around a strict rule: anything that can be detected reliably from the stored HTML is analysed locally; AI is
 reserved for semantic judgements that need language/context reasoning.
 
-## Supported content in 1.0
+## Content analysed
 
 The collector audits teacher-authored course content from:
 
