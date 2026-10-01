@@ -35,6 +35,13 @@ use stdClass;
  */
 final class assignment_provider implements provider_interface {
 
+    /**
+     * Method collect.
+     *
+     * @param stdClass $course Parameter course.
+     * @param course_modinfo $modinfo Parameter modinfo.
+     * @return array Return value.
+     */
     public function collect(stdClass $course, course_modinfo $modinfo): array {
         global $DB;
         $items = [];
