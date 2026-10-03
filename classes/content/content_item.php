@@ -41,11 +41,22 @@ final class content_item {
      * @param moodle_url $editurl Local edit URL controlled by PHP.
      */
     public function __construct(
+        /** @var string Stable local identifier used only during this request. */
         public readonly string $id,
+
+        /** @var string Source type. */
         public readonly string $source,
+
+        /** @var string Human-readable title. */
         public readonly string $title,
+
+        /** @var string Human-readable location. */
         public readonly string $location,
+
+        /** @var string Stored HTML fragment. */
         public readonly string $html,
+
+        /** @var moodle_url Local edit URL controlled by PHP. */
         public readonly moodle_url $editurl,
     ) {
     }
