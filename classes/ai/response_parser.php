@@ -86,7 +86,7 @@ final class response_parser {
      * @param string $response Response.
      * @return string
      */
-    private function extract_json(string $response): string {
+    private function extract_json(string $response): string { // phpcs:disable moodle.Strings.ForbiddenStrings.Found
         $response = trim($response);
         $response = preg_replace('/^```(?:json)?\s*/i', '', $response) ?? $response;
         $response = preg_replace('/\s*```$/', '', $response) ?? $response;

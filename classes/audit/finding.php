@@ -38,10 +38,19 @@ final class finding {
      * @param string $suggestion Human-facing remediation guidance.
      */
     public function __construct(
+        /** @var string */
         public readonly string $ruleid,
+
+        /** @var string */
         public readonly string $severity,
+
+        /** @var string */
         public readonly string $element,
+
+        /** @var string */
         public readonly string $reason,
+
+        /** @var string */
         public readonly string $suggestion,
     ) {
     }
