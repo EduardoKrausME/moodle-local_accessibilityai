@@ -28,6 +28,8 @@ use advanced_testcase;
 use context_course;
 
 /**
+ * Class capability_test
+ *
  * @coversNothing
  */
 final class capability_test extends advanced_testcase {

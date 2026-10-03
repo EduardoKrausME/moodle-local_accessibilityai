@@ -29,6 +29,8 @@ use local_accessibilityai\ai\response_parser;
 use UnexpectedValueException;
 
 /**
+ * Class ai_response_parser_test
+ *
  * @covers \local_accessibilityai\ai\response_parser
  */
 final class ai_response_parser_test extends advanced_testcase {
@@ -65,7 +67,7 @@ final class ai_response_parser_test extends advanced_testcase {
      *
      * @return void
      */
-    public function test_response_is_sanitized(): void {
+    public function test_response_is_sanitized(): void { // phpcs:disable moodle.Strings.ForbiddenStrings.Found
         $response = '```json\n' . json_encode([
                 'suggestions' => [[
                     'itemid' => 'page:10',
