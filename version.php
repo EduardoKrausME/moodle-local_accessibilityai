@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2026101200;
-$plugin->release = '1.0.2';
+$plugin->version = 2026101400;
+$plugin->release = '1.0.3';
 $plugin->component = 'local_accessibilityai';
 $plugin->requires = 2024100700;
 $plugin->maturity = MATURITY_STABLE;
